@@ -50,7 +50,11 @@ module C_Cradle_Fixed() {
     
     // 1. DIMENSIONS
     wall_thick = 4.0;          // Thickened wall
-    arm_len_x  = 22.0;         // Reach to hug servo
+    
+    // Total Length target: ~22.5mm (Match Servo Body, stop before ears).
+    // Length = wall_thick + arm_len_x.
+    // 22.5 = 4 + 18.5.
+    arm_len_x  = 18.5;         // Restored length to cover body
     arm_h      = 16.0;         // Compact height (-8 to +8)
     
     // 2. POSITIONING
@@ -63,7 +67,8 @@ module C_Cradle_Fixed() {
         union() {
             // A. LEFT WALL (BASE)
             // Sits at local origin (0, -15, -8)
-            translate([0, -15, -arm_h/2]) cube([wall_thick, 30, arm_h]);
+            // Extended Y-length to 33 to reach Back Arm at Y=13
+            translate([0, -15, -arm_h/2]) cube([wall_thick, 33, arm_h]);
             
             // B. PIVOT PIN
             // Extends from local 0,0,0
@@ -71,14 +76,11 @@ module C_Cradle_Fixed() {
 
             // C. FRONT ARM (Camera Side)
             difference() {
-                translate([0, -15, -arm_h/2]) cube([arm_len_x + wall_thick, 5, arm_h]); 
-                // Servo Mounting Hole
-                translate([20, -10, 0]) rotate([90, 0, 0]) cylinder(d=2, h=10); 
+                translate([0, -14, -arm_h/2]) cube([arm_len_x + wall_thick, 5, arm_h]); 
             }
             
             // D. CAMERA MOUNT PLATE
-            // User: translate([12+3.5, -19+3.5, 0]) -> [15.5, -15.5, 0] relative to '2'
-            // Local X = 15.5 - 2 = 13.5.
+            // Attached to Front Arm.
             translate([13.5, -15.5, 0]) rotate([90, 0, 0]) {
                 difference() {
                     cube([28, 28, 4], center=true); 
@@ -88,10 +90,9 @@ module C_Cradle_Fixed() {
             }
 
             // E. BACK ARM
+            // Moved to Y=14 (Tightened from 15 based on user feedback).
             difference() {
-                translate([0, 10, -arm_h/2]) cube([arm_len_x + wall_thick, 5, arm_h]); 
-                // Servo Mounting Hole
-                translate([20, 15, 0]) rotate([90, 0, 0]) cylinder(d=2, h=10);
+                translate([0, 14, -arm_h/2]) cube([arm_len_x + wall_thick, 5, arm_h]); 
             }
         }
     }
