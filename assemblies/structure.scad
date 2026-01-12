@@ -21,7 +21,7 @@ module Layer_1_Drive_Unit() {
 
 module L1_Bottom_Plate() { 
     translate([-half_w, -half_l, 0]) { 
-        color("cyan", 0.5) translate([0, 0, chassis_z]) difference() { 
+        color("#111111") translate([0, 0, chassis_z]) difference() { 
             cube([chassis_w, chassis_l, chassis_t]); 
             // Widen cutouts by 10mm (was 25 width) -> Restoring to 25mm
             translate([-1, half_l + 20 - 35, -1]) cube([25, 70, 5]); 
@@ -53,7 +53,7 @@ module L1_Bottom_Plate() {
 
 module L1_Top_Plate() { 
     translate([-half_w, -half_l, 0]) { 
-        color("cyan", 0.3) translate([0, 0, deck_1_z + standoff_h]) difference() { 
+        color("#111111") translate([0, 0, deck_1_z + standoff_h]) difference() { 
             cube([chassis_w, chassis_l, chassis_t]); 
             translate([-1, half_l + 20 - 35, -1]) cube([25, 70, 5]); 
             translate([chassis_w-24, half_l + 20 - 35, -1]) cube([25, 70, 5]); 

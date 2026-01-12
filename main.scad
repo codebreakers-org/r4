@@ -14,7 +14,7 @@ use <assemblies/electronics_layer.scad>;
 
 // 3. ROUTER (View Controller)
 // 0 = Master, 100 = Structure, 200 = Sensors, etc.
-view_index = 00; 
+view_index = 0; 
 explode_factor = 0.0; 
 
 // 4. RENDER
